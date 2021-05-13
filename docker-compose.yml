@@ -1,0 +1,88 @@
+version:  '3.9'
+
+services:
+  book-service:
+    image:  book-service
+    build:
+      context:  BookService/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+      
+  user-authentication-service:
+    image:  user-authentication-service
+    build:
+      context:  UserAuthenticationService/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8082:8082
+    depends_on:
+      - mysql
+      - mongo 
+      
+  user-service:
+    image:  user-service
+    build:
+      context:  UserService/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8083:8083
+    depends_on:
+      - mysql
+      - mongo
+      
+  favourite-service:
+    image:  favourite-service
+    build:
+      context:  FavouriteService/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8084:8084
+    depends_on:
+      - mongo
+      
+  search-service:
+    image:  search-service
+    build:
+      context:  SearchService/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8085:8085
+    depends_on:
+      - mongo
+      
+  recomendation-service:
+    image:  recomendation-service
+    build:
+      context:  RecomendationService/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8086:8086
+    depends_on:
+      - mongo
+      
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root1
+      MYSQLPASSWORD: root
+      MYSQL_DATABASE: BookProject
+
+  mongo:
+      image: mongo:latest
+      command: mongod --port 27017
+      restart: always
+      ports:
+        - 27017:27017
