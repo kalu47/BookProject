@@ -1,3 +1,11 @@
+Fully working docker compose book application
+Developed By
+	Mohammed Khalis
+	Marison Dicruz
+	Febin Wilson
+
+
+
 DATABASE NAME : BookProject
 
 ======================================================================================
